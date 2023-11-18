@@ -31,6 +31,7 @@ public class Server extends JFrame implements Runnable {
 	public Server() {
 		super("Game Server");
 		ta = new JTextArea();
+
 		ta.setWrapStyleWord(true);
 		JScrollPane sp = new JScrollPane(ta);
 		this.add(sp);
