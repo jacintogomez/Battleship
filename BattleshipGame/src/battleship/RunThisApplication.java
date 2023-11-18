@@ -9,7 +9,6 @@ public class RunThisApplication {
 		sv.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    sv.setVisible(true);
 		Player pl = new Player();
-
 	}
 
 }

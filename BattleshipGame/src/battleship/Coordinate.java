@@ -8,6 +8,7 @@ public class Coordinate implements Serializable {
 	protected int rawcolumn;
 	protected int rawrow;
 	protected char special;
+	private int nothing;
 	
 	public Coordinate(int column,int row) {
 		this.rawrow=row;
