@@ -1548,7 +1548,7 @@ public class Board extends JFrame implements Runnable, Serializable, ActionListe
 
 
 	public static void main(String[] args) {
-		Board game=new Board("Jacinto","12345");
+		Board game=new Board("Player","12345");
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    game.setVisible(true);
 	    game.setResizable(true);
