@@ -59,8 +59,8 @@ public class NoSaveState extends JFrame implements Runnable {
     private boolean gameinprogress,shipsset=false, playerWon = false, computerWon = false, loadedGame = false;
     private Queue<Coordinate> attack;
 
-    private JLabel warning,enterlabel;
-    private JTextField enter;
+    private JLabel warning,enterlabel,userenternamelabel;
+    private JTextField enter,userentername;
     private String choice,lastchoice;
     private JTextArea messages, winner;
     private JScrollPane scroll;
@@ -78,23 +78,6 @@ public class NoSaveState extends JFrame implements Runnable {
     ObjectOutputStream toServer = null;
     ObjectInputStream fromServer = null;
 
-    public NoSaveState() {
-        this.username = "Jacinto";
-        this.password = "12345";
-        for(int x=0;x<10;x++) {
-            for(int y=0;y<10;y++) {
-                mygrid[x][y]=1;
-                opgrid[x][y]=1;
-            }
-        }
-        ophitsleft=myhitsleft=17;
-        createships();
-        setopponentships();
-        setuserships();
-        //randomizeuserships();
-        launchgame();
-    }
-
     public NoSaveState(String username,String password) {
         this.username=username;
         this.password=password;
@@ -111,64 +94,6 @@ public class NoSaveState extends JFrame implements Runnable {
         //setuserships();
         //randomizeuserships();
         launchgame();
-        try {
-            socket = new Socket("localhost", 8000);
-            try {
-                toServer = new ObjectOutputStream(socket.getOutputStream());
-                fromServer = new ObjectInputStream(socket.getInputStream());
-
-            }
-            catch (IOException ex) {
-                messages.append(ex.toString() + '\n');
-            }
-            messages.append("connected\n");
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            messages.append("connection Failure\n");
-        }
-    }
-
-    public NoSaveState(String username,String password,int mygrid[][],int opgrid[][],ArrayList<Ship> myships,
-                 ArrayList<Ship> opships,int myhitsleft,int ophitsleft,boolean launchGame, Queue<Coordinate> attack,
-                 boolean shipsset) {
-        this.shipsset= shipsset;
-        this.loadedGame = true;
-        this.username=username;
-        this.password=password;
-        this.mygrid=mygrid;
-        this.opgrid=opgrid;
-        this.myships=myships;
-        this.opships=opships;
-        this.myhitsleft=myhitsleft;
-        this.ophitsleft=ophitsleft;
-        this.attack=(LinkedList)attack;
-//		for(Coordinate s : this.attack) {
-//			  System.out.println(s.toString());
-//		}
-//		System.out.println("done with first");
-//		for(Coordinate s : attack) {
-//			  System.out.println(s.toString());
-//		}
-//		System.out.println("done with second");
-        if(launchGame == true) {
-            launchgame();
-            try {
-                socket = new Socket("localhost", 8000);
-                try {
-                    toServer = new ObjectOutputStream(socket.getOutputStream());
-                    fromServer = new ObjectInputStream(socket.getInputStream());
-
-                }
-                catch (IOException ex) {
-                    messages.append(ex.toString() + '\n');
-                }
-                messages.append("connected\n");
-            } catch (IOException e1) {
-                e1.printStackTrace();
-                messages.append("connection Failure\n");
-            }
-        }
-
     }
 
     public int[][] getMyGrid(){
@@ -1020,7 +945,7 @@ public class NoSaveState extends JFrame implements Runnable {
     }
 
     public static void main(String[] args) {
-        Board game=new Board("Player","12345");
+        NoSaveState game=new NoSaveState("Player","12345");
         game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         game.setVisible(true);
         game.setResizable(true);
