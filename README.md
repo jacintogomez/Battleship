@@ -1,1 +1,1 @@
-# Intro-Java-Battleship
+# Battleship
